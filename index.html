@@ -1,0 +1,285 @@
+<!DOCTYPE html>  
+<html lang="pt-BR">  
+<head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+  <title>Portfólio de Fábio Silva</title>  
+  <script src="https://cdn.tailwindcss.com"></script>  
+  <style>  
+    /* ==== FONTES ==== */  
+    body {  
+      font-family: 'Inter', sans-serif;  
+      background: radial-gradient(circle, rgba(20,20,30,1) 0%, rgba(10,10,20,1) 100%);  
+    }  
+
+    /* Glassmorphism Effect */  
+    .glassmorphism {  
+      background: rgba(255, 255, 255, 0.1);  
+      backdrop-filter: blur(10px);  
+      border: 1px solid rgba(255, 255, 255, 0.125);  
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);  
+    }  
+
+    /* ==== ANIMAÇÕES PERSONALIZADAS ==== */  
+    @keyframes fadeIn {  
+      0% {  
+        opacity: 0;  
+        transform: translateY(20px);  
+      }  
+      100% {  
+        opacity: 1;  
+        transform: translateY(0);  
+      }  
+    }  
+
+    @keyframes float {  
+      0% {  
+        transform: translateY(0px);  
+      }  
+      50% {  
+        transform: translateY(-10px);  
+      }  
+      100% {  
+        transform: translateY(0px);  
+      }  
+    }  
+
+    @keyframes scaleUp {  
+      0% {  
+        transform: scale(1);  
+      }  
+      50% {  
+        transform: scale(1.05);  
+      }  
+      100% {  
+        transform: scale(1);  
+      }  
+    }  
+
+    .fade-in {  
+      animation: fadeIn 1s ease-out forwards;  
+    }  
+
+    .float {  
+      animation: float 3s ease-in-out infinite;  
+    }  
+
+    .scale-up {  
+      animation: scaleUp 0.5s ease-in-out forwards;  
+    }  
+
+    /* ==== EFEITOS DE TRANSIÇÃO ==== */  
+    .btn-hover:hover {  
+      transform: scale(1.05);  
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);  
+    }  
+
+    .project-card {  
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);  
+      will-change: transform, box-shadow;  
+    }  
+
+    .project-card:hover {  
+      transform: translateY(-15px) rotate(2deg);  
+      box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);  
+    }  
+
+    /* ==== BORDAS E SOMBREAMENTO ==== */  
+    .img-border {  
+      border: 4px solid #3b82f6;  
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);  
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;  
+    }  
+
+    .img-border:hover {  
+      border-color: #60a5fa;  
+      box-shadow: 0 0 20px rgba(96, 165, 250, 0.7);  
+    }  
+
+    /* ==== ÍCONES ADICIONAIS ==== */  
+    .social-icon {  
+      transition: transform 0.3s ease, color 0.3s ease;  
+    }  
+
+    .social-icon:hover {  
+      transform: scale(1.2);  
+      color: #3b82f6;  
+    }  
+
+    /* Estilo para o nick do Discord */  
+    .discord-nick {  
+      display: none; /* Inicialmente escondido */  
+      font-size: 0.875rem; /* Tamanho da fonte menor */  
+      color: #a0aec0; /* Cor do texto */  
+    }  
+
+    /* Estilo para legendas */  
+    .label {  
+      font-weight: 500; /* Peso da fonte ajustado */  
+    }  
+  </style>  
+  <script>  
+    // Função para atualizar o relógio em tempo real  
+    function atualizarRelogio() {  
+      const relogio = document.getElementById("relogio");  
+      const dataAtual = new Date();  
+      const hora = dataAtual.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });  
+      const data = dataAtual.toLocaleDateString("pt-BR", { weekday: "long", year: "numeric", month: "long", day: "numeric" });  
+      relogio.innerHTML = `${hora} - ${data}`;  
+    }  
+    setInterval(atualizarRelogio, 1000); // Atualiza o relógio a cada segundo  
+
+    // Função para mostrar o nick do Discord  
+    function mostrarNickDiscord() {  
+      const nick = document.getElementById("discord-nick");  
+      nick.style.display = nick.style.display === "none" ? "block" : "none"; // Alterna a visibilidade  
+    }  
+  </script>  
+</head>  
+<body class="text-gray-200 overflow-x-hidden transition-colors duration-300">  
+  <!-- ======== MENU FIXO ======== -->  
+  <nav class="fixed w-full bg-gray-900 bg-opacity-80 shadow-md z-50 fade-in">  
+    <div class="container mx-auto flex justify-between items-center p-4">  
+      <div class="flex items-center space-x-4">  
+        <h1 class="text-3xl font-extrabold text-blue-400">Moks</h1>  
+        <span id="relogio" class="text-gray-400 text-sm"></span>  
+      </div>  
+      <div class="flex space-x-6">  
+        <a href="https://github.com/MoksFabio" target="_blank" class="flex items-center text-gray-200 hover:text-blue-500 transition social-icon">  
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">  
+            <path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.16 6.84 9.49.5.09.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.79.61-3.38-1.35-3.38-1.35-.45-1.14-1.1-1.44-1.1-1.44-.9-.61.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.64.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 5.83c.85.004 1.71.115 2.5.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.83-2.35 4.68-4.58 4.93.36.31.68.92.68 1.85 0 1.34-.01 2.42-.01 2.75 0 .27.18.58.69.48A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z"/>  
+          </svg>  
+          GitHub  
+        </a>  
+        <div class="flex items-center relative">  
+          <button onclick="mostrarNickDiscord()" class="text-gray-200 hover:text-blue-500 transition">  
+            Discord  
+          </button>  
+          <span id="discord-nick" class="discord-nick">moksf</span>  
+        </div>  
+      </div>  
+    </div>  
+  </nav>  
+
+  <!-- ======== HEADER / HERO ======== -->  
+  <header class="relative h-screen w-full flex items-center justify-center bg-cover bg-center fade-in" style="background-image: url('static/images/windows.jpg');">  
+    <div class="absolute inset-0 bg-black bg-opacity-60"></div>  
+    <div class="relative z-10 text-center p-6 rounded-lg">  
+      <h2 class="text-5xl md:text-6xl font-extrabold mb-4 text-blue-400 drop-shadow-lg">  
+        Transformando Ideias em Realidade Digital  
+      </h2>  
+      <p class="text-lg md:text-xl mb-8 drop-shadow-lg">  
+        Um desenvolvedor apaixonado por tecnologia, inovação e criação de soluções automáticas.   
+      </p>  
+      <a href="#contato" class="inline-block bg-blue-600 px-8 py-3 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition btn-hover scale-up">  
+        Entre em Contato  
+      </a>  
+    </div>  
+  </header>  
+  
+  <!-- ======== SEÇÃO SOBRE ======== -->  
+  <section id="sobre" class="bg-gray-900 mt-12">  
+    <div class="container mx-auto px-4 fade-in">  
+      <h2 class="text-4xl font-bold text-center text-blue-400 mb-6">Sobre Mim</h2>  
+      <div class="flex flex-col md:flex-row items-center">  
+        <img  
+          src="static/images/Fábio.jpg"  
+          alt="Fábio Silva"  
+          class="w-48 h-48 rounded-full border-4 border-blue-500 mb-6 md:mb-0 md:mr-6 object-cover img-border scale-up"  
+        />  
+        <div class="text-lg leading-relaxed space-y-4">  
+          <p>Yo! Eu sou Fábio, com apelido de Moks. Concluí o ensino médio e estou animado para começar a me profissionalizar em Análise e Desenvolvimento de Sistemas (ADS).</p>  
+          <p>Acho a programação intrigante, pois é muito legal construir coisas do nada e resolver problemas escrevendo. Eu me esforço para continuar aprendendo; pode ser outra linguagem ou apenas outra ferramenta de programação. Gosto de usar a inteligência artificial ao meu favor.</p>  
+          <p>Quando não estou programando, adoro assistir programas de TV, jogar e apenas sair com meus amigos. Acho que você precisa ter um equilíbrio entre estudar e aproveitar a vida.</p>  
+          <p>É isso! Estou animado para esta nova aventura e mal posso esperar para saber aonde a programação me levará.</p>  
+        </div>  
+      </div>  
+    </div>  
+  </section>  
+  
+  <!-- ======== SEÇÃO PROJETOS ======== -->  
+  <section id="projetos" class="bg-gray-900 mt-4">  
+    <div class="container mx-auto px-4 fade-in">  
+      <h2 class="text-4xl font-bold text-center text-blue-400 mb-6">Meus Projetos</h2>  
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">  
+        <div class="bg-gray-800 p-6 rounded-lg shadow-md project-card scale-up glassmorphism">  
+          <h3 class="text-2xl font-semibold text-blue-400 mb-4">Grande Recife Consórcio de Transportes</h3>  
+          <p class="text-gray-300">Software em produção com o objetivo de automatizar trabalhos manuais, desenvolvendo análises precisas sobre demanda de passageiros e eficiência do sistema de transporte público.</p>  
+          <div class="flex mt-4">  
+            <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded mr-2">Python</span> 
+            <span class="bg-purple-500 text-white text-xs px-2 py-1 rounded mr-2">Java</span>   
+            <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">Análise de Dados</span>  
+          </div>  
+        </div>  
+        <div class="bg-gray-800 p-6 rounded-lg shadow-md project-card scale-up glassmorphism">  
+          <h3 class="text-2xl font-semibold text-blue-400 mb-4">RH Digital - HRIS Connect</h3>  
+          <p class="text-gray-300">Projeto Integrador do SENAC com o objetivo de automatizar o trabalho manual dos setores de RH e DP, fornecendo banco de dados e soluções inovadoras para gestão de recursos humanos.</p>  
+          <div class="flex mt-4">  
+            <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded mr-2">Python</span>  
+            <span class="bg-purple-500 text-white text-xs px-2 py-1 rounded mr-2">Java</span>  
+            <span class="bg-pink-500 text-white text-xs px-2 py-1 rounded">Gestão</span>  
+          </div>  
+        </div>  
+        <div class="bg-gray-800 p-6 rounded-lg shadow-md project-card scale-up glassmorphism">  
+          <h3 class="text-2xl font-semibold text-blue-400 mb-4">Projeto em Produção</h3>  
+          <p class="text-gray-300">A produzir.</p>  
+        </div>  
+      </div>  
+    </div>  
+  </section>  
+  
+  <!-- ======== SEÇÃO CONTATO ======== -->  
+  <section id="contato" class="bg-gray-900 mt-4 pb-6">  
+    <div class="container mx-auto px-4 fade-in">  
+      <h2 class="text-4xl font-bold text-center text-blue-400 mb-1">Contato</h2>  
+      <div class="max-w-md mx-auto bg-gray-800 p-6 rounded-lg shadow-md">  
+        <p class="mb-4 text-lg">  
+          <span class="label">Email:</span>  
+          <a   
+            href="mailto:fabiosilvalima133@gmail.com"  
+            class="text-blue-400 hover:text-blue-500 transition"  
+          >  
+            fabiosilvalima133@gmail.com  
+          </a>  
+        </p>  
+        <p class="mb-4 text-lg">  
+          <span class="label">Celular:</span>  
+          <a   
+            href="https://wa.me/558183082595"  
+            class="text-blue-400 hover:text-blue-500 transition"  
+            target="_blank"  
+          >  
+            (81) 8308-2595  
+          </a> (WhatsApp)  
+        </p>  
+        <div class="flex justify-center space-x-4 mt-4">  
+          <a href="https://www.linkedin.com/in/f%C3%A1bio-silva-5a0094348/" target="_blank" class="text-blue-400 hover:text-blue-500 transition social-icon">  
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">  
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2h-4a2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />  
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 9h4v12H2z" />  
+              <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="2"></circle>  
+            </svg>  
+          </a>  
+          <a href="https://x.com/MoksFabio" target="_blank" class="text-blue-400 hover:text-blue-500 transition social-icon">  
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">  
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0016.5 2c-2.72 0-4.92 2.2-4.92 4.92 0 .38.04.75.11 1.1C7.69 7.81 4.07 5.92 1.64 2.15a4.82 4.82 0 00-.66 2.48c0 1.7.87 3.2 2.19 4.08A4.47 4.47 0 012 9.56v.06c0 2.38 1.7 4.36 3.95 4.8a4.52 4.52 0 01-2.22.08c.63 1.95 2.46 3.37 4.6 3.41A9.04 9.04 0 010 19.54a12.94 12.94 0 006.29 1.84c7.55 0 11.68-6.26 11.68-11.68 0-.18 0-.35-.01-.53A8.36 8.36 0 0023 3z" />  
+            </svg>  
+          </a>  
+          <a href="https://www.instagram.com/moksfabio" target="_blank" class="text-blue-400 hover:text-blue-500 transition social-icon">  
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">  
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2.163c3.313 0 3.688 0 5.004.072 1.5.086 2.56.37 3.15 1.06.59.69.974 1.65 1.06 3.15.072 1.316.072 1.691.072 5.004s0 3.688-.072 5.004c-.086 1.5-.37 2.56-1.06 3.15-.59.69-1.65 1.074-3.15 1.06C15.688 21.837 15.313 21.837 12 21.837s-3.688 0-5.004-.072c-1.5-.014-2.56-.37-3.15-1.06-.69-.59-1.074-1.65-1.06-3.15C2.163 15.688 2.163 15.313 2.163 12s0-3.688.072-5.004c.086-1.5.37-2.56 1.06-3.15C6.048 2.537 7.108 2.163 8.608 2.163c1.316 0 2.63.004 4.392.004zM12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-8 3.999 3.999 0 010 8zm4.406-10.162a1.44 1.44 0 100 2.878 1.44 1.44 0 000-2.878z" />  
+            </svg>  
+          </a>  
+        </div>  
+      </div>  
+    </div>  
+  </section>  
+  
+  <!-- ======== RODAPÉ ======== -->  
+  <footer class="bg-gray-800 py-6 shadow-inner text-center">  
+    <p class="text-gray-400 text-sm">  
+      &copy; 2025 Fábio Silva. Todos os direitos reservados.  
+    </p>  
+  </footer>  
+</body>  
+</html>  
