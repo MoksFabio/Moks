@@ -1,285 +1,561 @@
-<!DOCTYPE html>  
-<html lang="pt-BR">  
-<head>  
-  <meta charset="UTF-8" />  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
-  <title>Portfólio de Fábio Silva</title>  
-  <script src="https://cdn.tailwindcss.com"></script>  
-  <style>  
-    /* ==== FONTES ==== */  
-    body {  
-      font-family: 'Inter', sans-serif;  
-      background: radial-gradient(circle, rgba(20,20,30,1) 0%, rgba(10,10,20,1) 100%);  
-    }  
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fábio Silva | Analista e Desenvolvedor de Sistemas</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
 
-    /* Glassmorphism Effect */  
-    .glassmorphism {  
-      background: rgba(255, 255, 255, 0.1);  
-      backdrop-filter: blur(10px);  
-      border: 1px solid rgba(255, 255, 255, 0.125);  
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);  
-    }  
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a14;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
 
-    /* ==== ANIMAÇÕES PERSONALIZADAS ==== */  
-    @keyframes fadeIn {  
-      0% {  
-        opacity: 0;  
-        transform: translateY(20px);  
-      }  
-      100% {  
-        opacity: 1;  
-        transform: translateY(0);  
-      }  
-    }  
+        h1, h2, h3, h4, h5, h6 {
+            color: #e2e8f0;
+        }
+        
+        p {
+            color: #94a3b8;
+        }
 
-    @keyframes float {  
-      0% {  
-        transform: translateY(0px);  
-      }  
-      50% {  
-        transform: translateY(-10px);  
-      }  
-      100% {  
-        transform: translateY(0px);  
-      }  
-    }  
+        .text-primary { color: #3b82f6; }
+        .bg-primary { background-color: #3b82f6; }
+        .hover\:bg-primary-hover:hover { background-color: #60a5fa; }
+        .border-primary { border-color: #3b82f6; }
+        .hover\:text-primary-hover:hover { color: #60a5fa; }
+        .bg-secondary { background-color: #14141e; }
 
-    @keyframes scaleUp {  
-      0% {  
-        transform: scale(1);  
-      }  
-      50% {  
-        transform: scale(1.05);  
-      }  
-      100% {  
-        transform: scale(1);  
-      }  
-    }  
+        .glassmorphism {
+            background: rgba(20, 20, 30, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.125);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        
+        .nav-scrolled {
+            background-color: rgba(10, 10, 20, 0.7) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background-color: #3b82f6;
+            animation: blink 0.7s infinite;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
 
-    .fade-in {  
-      animation: fadeIn 1s ease-out forwards;  
-    }  
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition-delay: 0.2s;
+        }
 
-    .float {  
-      animation: float 3s ease-in-out infinite;  
-    }  
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        /* ESTILOS DO CARROSSEL (SWIPER) */
+        .journey-carousel {
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 50px; 
+        }
 
-    .scale-up {  
-      animation: scaleUp 0.5s ease-in-out forwards;  
-    }  
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .swiper-slide:not(.swiper-slide-active) {
+            transform: scale(0.9);
+            opacity: 0.6;
+        }
 
-    /* ==== EFEITOS DE TRANSIÇÃO ==== */  
-    .btn-hover:hover {  
-      transform: scale(1.05);  
-      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);  
-    }  
+        .journey-card {
+            width: 90%;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #3b82f6 !important;
+            transition: color 0.3s ease;
+        }
+        
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            color: #60a5fa !important;
+        }
+        
+        .swiper-pagination-bullet {
+            background: #94a3b8 !important;
+            opacity: 0.7;
+        }
 
-    .project-card {  
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);  
-      will-change: transform, box-shadow;  
-    }  
+        .swiper-pagination-bullet-active {
+            background: #3b82f6 !important;
+            opacity: 1;
+        }
 
-    .project-card:hover {  
-      transform: translateY(-15px) rotate(2deg);  
-      box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);  
-    }  
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
 
-    /* ==== BORDAS E SOMBREAMENTO ==== */  
-    .img-border {  
-      border: 4px solid #3b82f6;  
-      box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);  
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;  
-    }  
+        .modal-content {
+            background-color: #14141e;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
 
-    .img-border:hover {  
-      border-color: #60a5fa;  
-      box-shadow: 0 0 20px rgba(96, 165, 250, 0.7);  
-    }  
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+        }
+        
+        .skill-icon {
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        .skill-icon:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 10px #3b82f6);
+        }
+    </style>
+</head>
+<body class="bg-secondary">
 
-    /* ==== ÍCONES ADICIONAIS ==== */  
-    .social-icon {  
-      transition: transform 0.3s ease, color 0.3s ease;  
-    }  
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-3xl font-extrabold text-primary">Moks</a>
+                <span id="relogio" class="hidden md:block text-slate-400 text-sm font-mono"></span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#sobre" class="text-slate-200 hover:text-primary-hover transition">Sobre</a>
+                <a href="#habilidades" class="text-slate-200 hover:text-primary-hover transition">Habilidades</a>
+                <a href="#jornada" class="text-slate-200 hover:text-primary-hover transition">Jornada</a>
+                <a href="#projetos" class="text-slate-200 hover:text-primary-hover transition">Projetos</a>
+                <a href="#contato" class="text-slate-200 hover:text-primary-hover transition">Contato</a>
+            </div>
+        </div>
+    </nav>
 
-    .social-icon:hover {  
-      transform: scale(1.2);  
-      color: #3b82f6;  
-    }  
+    <header class="relative h-screen w-full flex items-center justify-center bg-cover bg-center" style="background-image: url('windows.jpg');">
+        <div class="absolute inset-0 bg-black bg-opacity-70"></div>
+        <div class="relative z-10 text-center p-6">
+            <h1 class="text-4xl md:text-6xl font-black mb-4 drop-shadow-lg">
+                Olá! Eu sou <span class="text-primary">Fábio Silva</span>.
+            </h1>
+            <h2 class="text-2xl md:text-4xl font-bold mb-8 drop-shadow-lg">
+                <span id="typing-text"></span><span class="typing-cursor"></span>
+            </h2>
+            <a href="#projetos" class="inline-block bg-primary px-10 py-4 text-white font-semibold rounded-lg shadow-lg hover:bg-primary-hover transition duration-300 transform hover:scale-105">
+                Conheça Meus Projetos
+            </a>
+        </div>
+    </header>
 
-    /* Estilo para o nick do Discord */  
-    .discord-nick {  
-      display: none; /* Inicialmente escondido */  
-      font-size: 0.875rem; /* Tamanho da fonte menor */  
-      color: #a0aec0; /* Cor do texto */  
-    }  
+    <main class="container mx-auto px-6 py-20 space-y-28">
 
-    /* Estilo para legendas */  
-    .label {  
-      font-weight: 500; /* Peso da fonte ajustado */  
-    }  
-  </style>  
-  <script>  
-    // Função para atualizar o relógio em tempo real  
-    function atualizarRelogio() {  
-      const relogio = document.getElementById("relogio");  
-      const dataAtual = new Date();  
-      const hora = dataAtual.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });  
-      const data = dataAtual.toLocaleDateString("pt-BR", { weekday: "long", year: "numeric", month: "long", day: "numeric" });  
-      relogio.innerHTML = `${hora} - ${data}`;  
-    }  
-    setInterval(atualizarRelogio, 1000); // Atualiza o relógio a cada segundo  
+        <section id="sobre" class="scroll-reveal">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
+                <div class="md:col-span-1 flex justify-center">
+                    <img src="Fábio.jpg" alt="Fábio Silva" class="w-64 h-64 rounded-full object-cover border-4 border-primary shadow-2xl">
+                </div>
+                <div class="md:col-span-2">
+                    <h2 class="text-4xl font-bold mb-6 text-primary">Sobre Mim</h2>
+                    <div class="space-y-4 text-lg leading-relaxed">
+                        <p>Bem-vindo(a) ao meu perfil! Me chamo <strong>Fábio Silva</strong>, tenho 20 anos e sou um profissional em Análise e Desenvolvimento de Sistemas, focado em aprimoramento de habilidades FullStack.</p>
+                        <p>Atualmente, estou cursando minha graduação na <strong>UniAmérica</strong> e aplicando meu conhecimento em desafios práticos. Minha jornada profissional no <strong>Grande Recife Consórcio de Transporte Metropolitano</strong> me proporcionou uma experiência valiosa, onde pude ir além da gestão de informações e desenvolver soluções de software com impacto real.</p>
+                        <p>Motivado por tecnologia e boas práticas de programação, busco continuamente aplicar meu conhecimento para gerar valor, criar automações eficientes e crescer na área.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    // Função para mostrar o nick do Discord  
-    function mostrarNickDiscord() {  
-      const nick = document.getElementById("discord-nick");  
-      nick.style.display = nick.style.display === "none" ? "block" : "none"; // Alterna a visibilidade  
-    }  
-  </script>  
-</head>  
-<body class="text-gray-200 overflow-x-hidden transition-colors duration-300">  
-  <!-- ======== MENU FIXO ======== -->  
-  <nav class="fixed w-full bg-gray-900 bg-opacity-80 shadow-md z-50 fade-in">  
-    <div class="container mx-auto flex justify-between items-center p-4">  
-      <div class="flex items-center space-x-4">  
-        <h1 class="text-3xl font-extrabold text-blue-400">Moks</h1>  
-        <span id="relogio" class="text-gray-400 text-sm"></span>  
-      </div>  
-      <div class="flex space-x-6">  
-        <a href="https://github.com/MoksFabio" target="_blank" class="flex items-center text-gray-200 hover:text-blue-500 transition social-icon">  
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">  
-            <path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.16 6.84 9.49.5.09.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.79.61-3.38-1.35-3.38-1.35-.45-1.14-1.1-1.44-1.1-1.44-.9-.61.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.64.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 5.83c.85.004 1.71.115 2.5.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.83-2.35 4.68-4.58 4.93.36.31.68.92.68 1.85 0 1.34-.01 2.42-.01 2.75 0 .27.18.58.69.48A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z"/>  
-          </svg>  
-          GitHub  
-        </a>  
-        <div class="flex items-center relative">  
-          <button onclick="mostrarNickDiscord()" class="text-gray-200 hover:text-blue-500 transition">  
-            Discord  
-          </button>  
-          <span id="discord-nick" class="discord-nick">moksf</span>  
-        </div>  
-      </div>  
-    </div>  
-  </nav>  
+        <section id="habilidades" class="scroll-reveal">
+            <h2 class="text-4xl font-bold text-center mb-12 text-primary">Minhas Habilidades</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 text-center">
+                <div class="flex flex-col items-center skill-icon">
+                    <img alt="Python" title="Python" class="h-20" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" />
+                    <span class="mt-2 font-semibold">Python</span>
+                </div>
+                <div class="flex flex-col items-center skill-icon">
+                    <img alt="JavaScript" title="JavaScript" class="h-20" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" />
+                    <span class="mt-2 font-semibold">JavaScript</span>
+                </div>
+                <div class="flex flex-col items-center skill-icon">
+                    <img alt="HTML5" title="HTML5" class="h-20" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" />
+                    <span class="mt-2 font-semibold">HTML5</span>
+                </div>
+                <div class="flex flex-col items-center skill-icon">
+                    <img alt="CSS3" title="CSS3" class="h-20" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" />
+                    <span class="mt-2 font-semibold">CSS3</span>
+                </div>
+                <div class="flex flex-col items-center skill-icon">
+                    <img alt="PostgreSQL" title="PostgreSQL" class="h-20" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" />
+                    <span class="mt-2 font-semibold">PostgreSQL</span>
+                </div>
+                <div class="flex flex-col items-center skill-icon">
+                    <img alt="Git" title="Git" class="h-20" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" />
+                    <span class="mt-2 font-semibold">Git</span>
+                </div>
+                <div class="flex flex-col items-center skill-icon">
+                    <img alt="VS Code" title="VS Code" class="h-20" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" />
+                    <span class="mt-2 font-semibold">VS Code</span>
+                </div>
+                <div class="flex flex-col items-center skill-icon">
+                    <img alt="Gemini" title="Gemini" class="h-20" src="https://github.com/MoksFabio/MoksFabio/blob/main/gemini-changed-their-logo-v0-isn75ucqhdbf1-Photoroom.png?raw=true"/>
+                    <span class="mt-2 font-semibold">Gemini AI</span>
+                </div>
+            </div>
+        </section>
+        
+        <section id="jornada" class="scroll-reveal">
+            <h2 class="text-4xl font-bold text-center mb-12 text-primary">Minha Jornada</h2>
+            <div class="swiper journey-carousel">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                         <div class="journey-card glassmorphism p-8 rounded-lg">
+                            <h3 class="text-2xl font-bold text-primary">Jovem Aprendiz</h3>
+                            <h4 class="text-lg font-semibold mt-1">Grande Recife Consórcio</h4>
+                            <p class="text-md text-slate-400 my-2">Concluído</p>
+                            <p class="text-slate-300">Primeiro contato com o ambiente corporativo de TI, auxiliando na gestão de informações, suporte técnico e participando na criação de pequenas soluções.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="journey-card glassmorphism p-8 rounded-lg">
+                            <h3 class="text-2xl font-bold text-primary">Estagiário de TI</h3>
+                            <h4 class="text-lg font-semibold mt-1">Grande Recife Consórcio</h4>
+                            <p class="text-md text-slate-400 my-2">Presente</p>
+                            <p class="text-slate-300">Desenvolvimento, manutenção e automação de sistemas internos, focando em otimizar processos e na análise de dados para o transporte metropolitano.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="journey-card glassmorphism p-8 rounded-lg">
+                            <h3 class="text-2xl font-bold text-primary">Análise e Desenv. de Sistemas</h3>
+                            <h4 class="text-lg font-semibold mt-1">UniAmérica</h4>
+                            <p class="text-md text-slate-400 my-2">Em andamento</p>
+                            <p class="text-slate-300">Graduação com foco prático em engenharia de software, arquitetura de sistemas, banco de dados e desenvolvimento full-stack com metodologias ágeis.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </section>
+        
+        <section id="projetos" class="scroll-reveal">
+            <h2 class="text-4xl font-bold text-center mb-12 text-primary">Projetos em Destaque</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
 
-  <!-- ======== HEADER / HERO ======== -->  
-  <header class="relative h-screen w-full flex items-center justify-center bg-cover bg-center fade-in" style="background-image: url('windows.jpg');">  
-    <div class="absolute inset-0 bg-black bg-opacity-60"></div>  
-    <div class="relative z-10 text-center p-6 rounded-lg">  
-      <h2 class="text-5xl md:text-6xl font-extrabold mb-4 text-blue-400 drop-shadow-lg">  
-        Transformando Ideias em Realidade Digital  
-      </h2>  
-      <p class="text-lg md:text-xl mb-8 drop-shadow-lg">  
-        Um desenvolvedor apaixonado por tecnologia, inovação e criação de soluções automáticas.   
-      </p>  
-      <a href="#contato" class="inline-block bg-blue-600 px-8 py-3 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition btn-hover scale-up">  
-        Entre em Contato  
-      </a>  
-    </div>  
-  </header>  
-  
-  <!-- ======== SEÇÃO SOBRE ======== -->  
-  <section id="sobre" class="bg-gray-900 mt-12">  
-    <div class="container mx-auto px-4 fade-in">  
-      <h2 class="text-4xl font-bold text-center text-blue-400 mb-6">Sobre Mim</h2>  
-      <div class="flex flex-col md:flex-row items-center">  
-        <img  
-          src="Fábio.jpg"  
-          alt="Fábio Silva"  
-          class="w-48 h-48 rounded-full border-4 border-blue-500 mb-6 md:mb-0 md:mr-6 object-cover img-border scale-up"  
-        />  
-        <div class="text-lg leading-relaxed space-y-4">  
-          <p>Yo! Eu sou Fábio, com apelido de Moks. Concluí o ensino médio e estou animado para começar a me profissionalizar em Análise e Desenvolvimento de Sistemas (ADS).</p>  
-          <p>Acho a programação intrigante, pois é muito legal construir coisas do nada e resolver problemas escrevendo. Eu me esforço para continuar aprendendo; pode ser outra linguagem ou apenas outra ferramenta de programação. Gosto de usar a inteligência artificial ao meu favor.</p>  
-          <p>Quando não estou programando, adoro assistir programas de TV, jogar e apenas sair com meus amigos. Acho que você precisa ter um equilíbrio entre estudar e aproveitar a vida.</p>  
-          <p>É isso! Estou animado para esta nova aventura e mal posso esperar para saber aonde a programação me levará.</p>  
-        </div>  
-      </div>  
-    </div>  
-  </section>  
-  
-  <!-- ======== SEÇÃO PROJETOS ======== -->  
-  <section id="projetos" class="bg-gray-900 mt-4">  
-    <div class="container mx-auto px-4 fade-in">  
-      <h2 class="text-4xl font-bold text-center text-blue-400 mb-6">Meus Projetos</h2>  
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">  
-        <div class="bg-gray-800 p-6 rounded-lg shadow-md project-card scale-up glassmorphism">  
-          <h3 class="text-2xl font-semibold text-blue-400 mb-4">Grande Recife Consórcio de Transportes</h3>  
-          <p class="text-gray-300">Software em produção com o objetivo de automatizar trabalhos manuais, desenvolvendo análises precisas sobre demanda de passageiros e eficiência do sistema de transporte público.</p>  
-          <div class="flex mt-4">  
-            <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded mr-2">Python</span> 
-            <span class="bg-purple-500 text-white text-xs px-2 py-1 rounded mr-2">Java</span>   
-            <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">Análise de Dados</span>  
-          </div>  
-        </div>  
-        <div class="bg-gray-800 p-6 rounded-lg shadow-md project-card scale-up glassmorphism">  
-          <h3 class="text-2xl font-semibold text-blue-400 mb-4">RH Digital - HRIS Connect</h3>  
-          <p class="text-gray-300">Projeto Integrador do SENAC em produção, com o objetivo de automatizar o trabalho manual dos setores de RH e DP, fornecendo banco de dados e soluções inovadoras para gestão de recursos humanos.</p>  
-          <div class="flex mt-4">  
-            <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded mr-2">Python</span>  
-            <span class="bg-purple-500 text-white text-xs px-2 py-1 rounded mr-2">Java</span>  
-            <span class="bg-pink-500 text-white text-xs px-2 py-1 rounded">Gestão</span>  
-          </div>  
-        </div>  
-        <div class="bg-gray-800 p-6 rounded-lg shadow-md project-card scale-up glassmorphism">  
-          <h3 class="text-2xl font-semibold text-blue-400 mb-4">Projeto em Produção</h3>  
-          <p class="text-gray-300">A produzir.</p>  
-        </div>  
-      </div>  
-    </div>  
-  </section>  
-  
-  <!-- ======== SEÇÃO CONTATO ======== -->  
-  <section id="contato" class="bg-gray-900 mt-4 pb-6">  
-    <div class="container mx-auto px-4 fade-in">  
-      <h2 class="text-4xl font-bold text-center text-blue-400 mb-1">Contato</h2>  
-      <div class="max-w-md mx-auto bg-gray-800 p-6 rounded-lg shadow-md">  
-        <p class="mb-4 text-lg">  
-          <span class="label">Email:</span>  
-          <a   
-            href="mailto:fabiosilvalima133@gmail.com"  
-            class="text-blue-400 hover:text-blue-500 transition"  
-          >  
-            fabiosilvalima133@gmail.com  
-          </a>  
-        </p>  
-        <p class="mb-4 text-lg">  
-          <span class="label">Celular:</span>  
-          <a   
-            href="https://wa.me/558183082595"  
-            class="text-blue-400 hover:text-blue-500 transition"  
-            target="_blank"  
-          >  
-            (81) 8308-2595  
-          </a> (WhatsApp)  
-        </p>  
-        <div class="flex justify-center space-x-4 mt-4">  
-          <a href="https://www.linkedin.com/in/moksfabio/" target="_blank" class="text-blue-400 hover:text-blue-500 transition social-icon">  
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">  
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2h-4a2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />  
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 9h4v12H2z" />  
-              <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="2"></circle>  
-            </svg>  
-          </a>  
-          <a href="https://x.com/MoksFabio" target="_blank" class="text-blue-400 hover:text-blue-500 transition social-icon">  
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">  
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0016.5 2c-2.72 0-4.92 2.2-4.92 4.92 0 .38.04.75.11 1.1C7.69 7.81 4.07 5.92 1.64 2.15a4.82 4.82 0 00-.66 2.48c0 1.7.87 3.2 2.19 4.08A4.47 4.47 0 012 9.56v.06c0 2.38 1.7 4.36 3.95 4.8a4.52 4.52 0 01-2.22.08c.63 1.95 2.46 3.37 4.6 3.41A9.04 9.04 0 010 19.54a12.94 12.94 0 006.29 1.84c7.55 0 11.68-6.26 11.68-11.68 0-.18 0-.35-.01-.53A8.36 8.36 0 0023 3z" />  
-            </svg>  
-          </a>  
-          <a href="https://www.instagram.com/moksfabio" target="_blank" class="text-blue-400 hover:text-blue-500 transition social-icon">  
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">  
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2.163c3.313 0 3.688 0 5.004.072 1.5.086 2.56.37 3.15 1.06.59.69.974 1.65 1.06 3.15.072 1.316.072 1.691.072 5.004s0 3.688-.072 5.004c-.086 1.5-.37 2.56-1.06 3.15-.59.69-1.65 1.074-3.15 1.06C15.688 21.837 15.313 21.837 12 21.837s-3.688 0-5.004-.072c-1.5-.014-2.56-.37-3.15-1.06-.69-.59-1.074-1.65-1.06-3.15C2.163 15.688 2.163 15.313 2.163 12s0-3.688.072-5.004c.086-1.5.37-2.56 1.06-3.15C6.048 2.537 7.108 2.163 8.608 2.163c1.316 0 2.63.004 4.392.004zM12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-8 3.999 3.999 0 010 8zm4.406-10.162a1.44 1.44 0 100 2.878 1.44 1.44 0 000-2.878z" />  
-            </svg>  
-          </a>  
-        </div>  
-      </div>  
-    </div>  
-  </section>  
-  
-  <!-- ======== RODAPÉ ======== -->  
-  <footer class="bg-gray-800 py-6 shadow-inner text-center">  
-    <p class="text-gray-400 text-sm">  
-      &copy; 2025 Fábio Silva. Todos os direitos reservados.  
-    </p>  
-  </footer>  
-</body>  
-</html>  
+                <div class="project-card bg-secondary rounded-lg overflow-hidden shadow-lg cursor-pointer" onclick="openModal('modal-rcb')">
+                    <img src="https://github.com/MoksFabio/MoksFabio/blob/main/Rcb.png?raw=true" alt="Banner do Sistema RCB" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-primary">RCB - Remuneração, Custos e Bilhetagem</h3>
+                        <p class="text-slate-400 mb-4">Sistema de automação e eficiência para processos internos do setor GECO no Grande Recife Consórcio.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-900 text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded">Python</span>
+                            <span class="bg-yellow-900 text-yellow-300 text-xs font-semibold px-2.5 py-0.5 rounded">JavaScript</span>
+                             <span class="bg-orange-900 text-orange-300 text-xs font-semibold px-2.5 py-0.5 rounded">HTML/CSS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card bg-secondary rounded-lg overflow-hidden shadow-lg cursor-pointer" onclick="openModal('modal-rh')">
+                    <img src="https://github.com/MoksFabio/MoksFabio/blob/main/RH-Digital-Logo.png?raw=true" alt="Banner do Projeto RH Digital" class="w-full h-56 object-contain p-4">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-primary">RH Digital - HRIS Connect</h3>
+                        <p class="text-slate-400 mb-4">Projeto Integrador focado em simplificar e humanizar os processos de Recursos Humanos através da tecnologia.</p>
+                         <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-900 text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded">Python</span>
+                            <span class="bg-yellow-900 text-yellow-300 text-xs font-semibold px-2.5 py-0.5 rounded">JavaScript</span>
+                             <span class="bg-orange-900 text-orange-300 text-xs font-semibold px-2.5 py-0.5 rounded">HTML/CSS</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="contato" class="scroll-reveal">
+            <h2 class="text-4xl font-bold text-center mb-12 text-primary">Conecte-se Comigo</h2>
+            <div class="max-w-lg mx-auto text-center">
+                 <p class="text-lg text-slate-400 mb-8">Estou sempre aberto a novas oportunidades e colaborações. Sinta-se à vontade para entrar em contato através das minhas redes sociais ou por e-mail.</p>
+                <div class="flex justify-center space-x-6">
+                    <a href="https://www.linkedin.com/in/moksfabio/" target="_blank" class="text-slate-400 hover:text-primary-hover transition transform hover:scale-110">
+                        <svg class="w-10 h-10" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+                    </a>
+                    <a href="https://github.com/MoksFabio" target="_blank" class="text-slate-400 hover:text-primary-hover transition transform hover:scale-110">
+                        <svg class="w-10 h-10" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/moksfabio/" target="_blank" class="text-slate-400 hover:text-primary-hover transition transform hover:scale-110">
+                        <svg class="w-10 h-10" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>Instagram</title><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.784.305-1.455.718-2.126 1.387C1.337 2.701.92 3.372.612 4.146c-.3.765-.5 1.635-.56 2.913C.015 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.26 2.148.558 2.913.306.78.718 1.457 1.387 2.129.67.67 1.344 1.079 2.128 1.385.765.298 1.635.499 2.913.558C8.333 23.985 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.26 2.913-.558.78-.306 1.457-.718 2.129-1.387.67-.67 1.079-1.344 1.385-2.128.298-.765.499-1.635.558-2.913.06-1.318.072-1.724.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.26-2.148-.558-2.913-.306-.78-.718-1.457-1.387-2.129C21.299 1.337 20.628.92 19.854.612c-.765-.3-1.635-.5-2.913-.56C15.667.015 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.056 1.17-.249 1.805-.413 2.227-.217.562-.477.96-.896 1.382-.42.419-.819.679-1.381.896-.422.164-1.057.36-2.227.413-1.266.057-1.646.07-4.85.07s-3.585-.015-4.85-.074c-1.17-.056-1.805-.249-2.227-.413-.562-.217-.96-.477-1.382-.896-.419-.42-.679-.819-.896-1.381-.164-.422-.36-1.057-.413-2.227-.057-1.266-.07-1.646-.07-4.85s.015-3.585.07-4.85c.055-1.17.249-1.805.415-2.227.217-.562.477.96.896-1.382.42-.419.819-.679-1.381-.896.422-.164 1.057-.36 2.227-.415C8.415 2.176 8.797 2.16 12 2.16zm0 5.482A4.356 4.356 0 1 0 12 16.356a4.356 4.356 0 0 0 0-8.714zM12 14.2a2.2 2.2 0 1 1 0-4.4 2.2 2.2 0 0 1 0 4.4zm6.406-7.184a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
+                    </a>
+                </div>
+                <a href="mailto:fabiosilvalima133@gmail.com" class="mt-8 inline-block text-lg bg-primary text-white font-semibold py-3 px-8 rounded-lg hover:bg-primary-hover transition duration-300">
+                    Enviar um E-mail
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#0a0a14] py-6 text-center border-t border-[rgba(255,255,255,0.125)]">
+        <p class="text-slate-400 text-sm">
+            &copy; 2025 Fábio Silva. Todos os direitos reservados.
+        </p>
+    </footer>
+    
+    <a href="#" id="back-to-top" class="fixed bottom-5 right-5 bg-primary text-white p-3 rounded-full shadow-lg hover:bg-primary-hover transition opacity-0 transform translate-y-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+        </svg>
+    </a>
+    
+    <div id="modal-rcb" class="modal-overlay" onclick="closeModal('modal-rcb')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <img src="https://raw.githubusercontent.com/MoksFabio/MoksFabio/main/Rcb.png" alt="RCB" class="w-full h-64 object-cover rounded-t-lg mb-4">
+            <h2 class="text-3xl font-bold mb-4 text-primary">RCB - Remuneração, Custos e Bilhetagem</h2>
+            <p class="text-slate-400 mb-4">
+                Minha principal conquista no Grande Recife Consórcio de Transporte Metropolitano, este sistema trouxe mais automação e eficiência para os processos internos do setor da GECO. O sistema automatiza a coleta, processamento e análise de dados de bilhetagem, otimizando o cálculo de remuneração das empresas operadoras e fornecendo insights valiosos sobre a demanda e custos operacionais.
+            </p>
+            <h3 class="font-bold mb-2">Tecnologias Utilizadas:</h3>
+            <div class="flex flex-wrap gap-2">
+                <span class="bg-blue-900 text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded">Python</span>
+                <span class="bg-purple-900 text-purple-300 text-xs font-semibold px-2.5 py-0.5 rounded">Pandas</span>
+                <span class="bg-yellow-900 text-yellow-300 text-xs font-semibold px-2.5 py-0.5 rounded">JavaScript</span>
+                <span class="bg-orange-900 text-orange-300 text-xs font-semibold px-2.5 py-0.5 rounded">HTML/CSS</span>
+                 <span class="bg-green-900 text-green-300 text-xs font-semibold px-2.5 py-0.5 rounded">PostgreSQL</span>
+            </div>
+             <button onclick="closeModal('modal-rcb')" class="modal-close">
+                <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+    </div>
+    
+    <div id="modal-rh" class="modal-overlay" onclick="closeModal('modal-rh')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <img src="https://raw.githubusercontent.com/MoksFabio/MoksFabio/main/RH-Digital-Logo.png" alt="RH Digital" class="w-full h-64 object-contain rounded-t-lg mb-4 p-4">
+            <h2 class="text-3xl font-bold mb-4 text-primary">RH Digital - HRIS Connect</h2>
+            <p class="text-slate-400 mb-4">
+                <b>SIMPLIFICANDO PROCESSOS, POTENCIALIZANDO PESSOAS.</b><br>
+                Este foi o Projeto Integrador desenvolvido pela turma 170 ADM de Serviços Administrativos do SENAC. O HRIS Connect foi focado em simplificar e humanizar os processos de Recursos Humanos através da tecnologia, oferecendo uma plataforma centralizada para gestão de funcionários, folhas de ponto, benefícios e comunicação interna.
+            </p>
+            <h3 class="font-bold mb-2">Tecnologias Utilizadas:</h3>
+            <div class="flex flex-wrap gap-2">
+                <span class="bg-blue-900 text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded">Python</span>
+                <span class="bg-yellow-900 text-yellow-300 text-xs font-semibold px-2.5 py-0.5 rounded">JavaScript</span>
+                <span class="bg-orange-900 text-orange-300 text-xs font-semibold px-2.5 py-0.5 rounded">HTML/CSS</span>
+                <span class="bg-pink-900 text-pink-300 text-xs font-semibold px-2.5 py-0.5 rounded">Gestão de Projetos</span>
+            </div>
+            <div class="mt-6">
+                <a href="https://rhdigitalhrisconnect.github.io/Quem-Somos/" target="_blank" class="text-primary font-semibold hover:underline">Ver Projeto &rarr;</a>
+            </div>
+            <button onclick="closeModal('modal-rh')" class="modal-close">
+                <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            function atualizarRelogio() {
+                const relogioEl = document.getElementById("relogio");
+                if (!relogioEl) return;
+                const dataAtual = new Date();
+                const hora = dataAtual.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+                const data = dataAtual.toLocaleDateString("pt-BR", { year: "numeric", month: "long", day: "numeric" });
+                relogioEl.innerHTML = `${hora} - ${data}`;
+            }
+            setInterval(atualizarRelogio, 1000);
+            atualizarRelogio();
+
+            const typingTextEl = document.getElementById('typing-text');
+            const wordsToType = ["Analista de Sistemas.", "Desenvolvedor FullStack.", "Apaixonado por Automação."];
+            let wordIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function type() {
+                const currentWord = wordsToType[wordIndex];
+                if (isDeleting) {
+                    typingTextEl.textContent = currentWord.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    typingTextEl.textContent = currentWord.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+
+                if (!isDeleting && charIndex === currentWord.length) {
+                    setTimeout(() => isDeleting = true, 2000);
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % wordsToType.length;
+                }
+
+                const typingSpeed = isDeleting ? 100 : 150;
+                setTimeout(type, typingSpeed);
+            }
+            if (typingTextEl) type();
+
+            const scrollElements = document.querySelectorAll('.scroll-reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            scrollElements.forEach(el => {
+                observer.observe(el);
+            });
+
+            const navbar = document.getElementById('navbar');
+            const backToTopButton = document.getElementById('back-to-top');
+            window.onscroll = function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('nav-scrolled');
+                    backToTopButton.classList.remove('opacity-0', 'translate-y-2');
+                } else {
+                    navbar.classList.remove('nav-scrolled');
+                    backToTopButton.classList.add('opacity-0', 'translate-y-2');
+                }
+            };
+
+            // INICIALIZAÇÃO DO SWIPER
+            const swiper = new Swiper('.journey-carousel', {
+                loop: true,
+                grabCursor: true,
+                centeredSlides: true,
+                initialSlide: 1, // Começa no slide 1 (Estagiário)
+
+                // Pagination
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+
+                // Navigation arrows
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+
+                // Responsive breakpoints
+                breakpoints: {
+                    640: {
+                        slidesPerView: 1,
+                        spaceBetween: 20
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 30
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 40
+                    }
+                }
+            });
+        });
+        
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+    </script>
+</body>
+</html>
