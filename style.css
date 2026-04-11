@@ -1,0 +1,220 @@
+:root {
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --secondary: #60a5fa;
+    --bg: #020617;
+    --card-bg: rgba(15, 23, 42, 0.7);
+    --text: #f1f5f9;
+    --text-dim: #94a3b8;
+    --border: rgba(59, 130, 246, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    background-image: 
+        linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)),
+        url('windows.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.profile-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    margin: 0 auto 1.5rem;
+    padding: 3px;
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+}
+
+.profile-circle img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--bg);
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    background: linear-gradient(to right, #fff, var(--text-dim));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+section {
+    margin-bottom: 5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+h2::after {
+    content: '';
+    height: 1px;
+    flex: 1;
+    background: var(--border);
+}
+
+.about-text {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+}
+
+.about-text strong {
+    color: var(--text);
+}
+
+.skill-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+}
+
+.skill-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+}
+
+.skill-item:hover {
+    border-color: var(--primary);
+    transform: translateY(-4px);
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.project-card:hover {
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4);
+}
+
+.project-tag {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--secondary);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.project-card h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+}
+
+.project-card p {
+    color: var(--text-dim);
+    margin-bottom: 1.5rem;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary);
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.project-link:hover {
+    background: var(--primary-dark);
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+}
+
+.contact-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.contact-links a:hover {
+    color: var(--primary);
+}
+
+footer {
+    text-align: center;
+    padding: 4rem 0;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border);
+}
+
+@media (min-width: 768px) {
+    .project-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .project-card.featured {
+        grid-column: span 2;
+    }
+}
